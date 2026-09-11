@@ -140,7 +140,7 @@ app.put('/api/admin/orders/:id', auth, (req, res) => {
   db.prepare('UPDATE orders SET status=? WHERE id=?').run(req.body.status, Number(req.params.id));
   res.json({ ok: true });
 });
-
+app.use(express.static(path.join(ROOT, 'public')));
 app.get('/admin', (_req, res) => res.sendFile(path.join(ROOT, 'public', 'admin.html')));
 
 app.listen(PORT, '0.0.0.0', () => console.log(`Переселенець: http://0.0.0.0:${PORT}`));
