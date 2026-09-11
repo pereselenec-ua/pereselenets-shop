@@ -56,7 +56,11 @@ app.use((req, res, next) => {
 });
 app.use(express.json({ limit: '2mb' }));
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(ROOT, 'public')));
+app.get('/', (req, res) => res.sendFile(path.join(ROOT, 'index.html')));
+app.get('/admin', (req, res) => res.sendFile(path.join(ROOT, 'admin.html')));
+app.get('/script.js', (req, res) => res.sendFile(path.join(ROOT, 'script.js')));
+app.get('/style.css', (req, res) => res.sendFile(path.join(ROOT, 'style.css')));
+app.use('/images', express.static(path.join(ROOT, 'images')));
 app.use('/uploads', express.static(UPLOAD_DIR));
 
 const sessions = new Map();
