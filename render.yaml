@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: pereselenets-shop
+    runtime: node
+    region: frankfurt
+    plan: 0.5c-512mb
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    autoDeployTrigger: commit
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: DATA_DIR
+        value: /var/data
+      - key: UPLOAD_DIR
+        value: /var/data/uploads
+      - key: ADMIN_PASSWORD
+        generateValue: true
+    disk:
+      name: pereselenets-data
+      mountPath: /var/data
+      sizeGB: 1
